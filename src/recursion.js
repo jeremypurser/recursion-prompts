@@ -62,20 +62,60 @@ var sumBelow = function(n) {
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
-var range = function(x, y) {};
+var arr = [];
+var range = function(x, y) {
+  if (x === y) return [];
+
+  if (arr[arr.length - 1] === y - 1 || x === y + 1) {
+    var result = [...arr];
+    arr = [];
+    return result;
+  }
+
+  if (x > y) {
+    arr.push(x - 1);
+    return range(x - 1, y);
+  }
+
+  arr.push(x + 1);
+  return range(x + 1, y);
+};
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
 // 8^2 = 8 x 8 = 64. Here, 8 is the base and 2 is the exponent.
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
-var exponent = function(base, exp) {};
+var product = 1;
+var exponent = function(base, exp) {
+  var result;
+  if (exp === 0) {
+    result = product;
+    product = 1;
+    return result;
+  }
+  if (exp < 0) {
+    product /= base;
+    return exponent(base, exp + 1);
+  }
+  product *= base;
+  if (exp === 1) {
+    result = product;
+    product = 1;
+    return result;
+  }
+  return exponent(base, exp - 1);
+};
 
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
-var powerOfTwo = function(n) {};
+var powerOfTwo = function(n) {
+  if (n === 1) return true;
+  if (n < 1) return false;
+  return powerOfTwo(n / 2);
+};
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {};
